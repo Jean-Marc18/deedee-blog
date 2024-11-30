@@ -38,7 +38,7 @@ export const startup = defineType({
       type: "string",
       validation: (Rule) =>
         Rule.min(1)
-          .max(20)
+          .max(100)
           .required()
           .error("Entrer une catégorie s'il vous plaît"),
     }),

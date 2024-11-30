@@ -14,6 +14,20 @@ const config: Config = {
         xs: "475px",
       },
       colors: {
+        main: "#88aaee",
+        mainAccent: "#4d80e6", // not needed for shadcn components
+        overlay: "rgba(0,0,0,0.8)", // background color overlay for alert dialogs, modals, etc.
+
+        // light mode
+        bg: "#dfe5f2",
+        text: "#000",
+        border: "#000",
+
+        // dark mode
+        darkBg: "#272933",
+        darkText: "#eeefe9",
+        darkBorder: "#000",
+        secondaryBlack: "#212121",
         primary: {
           "100": "#FFE8F0",
           DEFAULT: "#EE2B69",
@@ -45,11 +59,24 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        base: "5px",
       },
       boxShadow: {
         100: "2px 2px 0px 0px rgb(0, 0, 0)",
         200: "2px 2px 0px 2px rgb(0, 0, 0)",
         300: "2px 2px 0px 2px rgb(238, 43, 105)",
+        light: "4px 4px 0px 0px #000",
+        dark: "4px 4px 0px 0px #000",
+      },
+      translate: {
+        boxShadowX: "4px",
+        boxShadowY: "4px",
+        reverseBoxShadowX: "-4px",
+        reverseBoxShadowY: "-4px",
+      },
+      fontWeight: {
+        base: "500",
+        heading: "700",
       },
     },
   },
