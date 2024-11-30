@@ -7,27 +7,26 @@ import React from "react";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity/types";
 import { Skeleton } from "./ui/skeleton";
+import { client } from "@/sanity/lib/client";
+import { STARTUP_VIEWS_QUERY } from "@/sanity/lib/queries";
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
-const StartupCard = ({ post }: { post: StartupTypeCard }) => {
-  const {
-    _createdAt,
-    title,
-    description,
-    image,
-    category,
-    views,
-    _id,
-    author,
-  } = post;
+const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
+  const { _createdAt, title, description, image, category, _id, author } = post;
+  const { views: totalViews } = await client
+    .withConfig({ useCdn: false })
+    .fetch(STARTUP_VIEWS_QUERY, { id: _id });
+
   return (
     <li className="startup-card group">
       <div className="flex-between">
         <p className="startup-card_date">{formatDate(_createdAt)}</p>
         <div className="flex gap-1.5">
           <EyeIcon className="size-6 text-primary" />
-          <span className="text-16-medium">{formatNumber(views ?? 0)}</span>
+          <span className="text-16-medium">
+            {formatNumber(totalViews ?? 0)}
+          </span>
         </div>
       </div>
 
@@ -43,7 +42,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
 
         <Link href={`/user/${author?._id}`}>
           <Image
-            className="rounded-full object-cover size-12"
+            className="rounded-full object-cover size-12 outline outline-2 outline-black"
             src={
               author?.image ??
               "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg"
@@ -66,7 +65,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
           <p className="text-16-medium">{category}</p>
         </Link>
         <Button className="startup-card_btn" asChild>
-          <Link href={`/startup/${_id}`}>Voir</Link>
+          <Link href={`/startup/${_id}`}>Lire</Link>
         </Button>
       </div>
     </li>

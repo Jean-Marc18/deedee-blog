@@ -4,7 +4,6 @@ import { LogOut, Plus, User2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { NbrButton } from "./ui/nbrButton";
 
 const Navbar = async () => {
   const session = await auth();
@@ -22,26 +22,26 @@ const Navbar = async () => {
       <nav className="flex justify-between items-center">
         <Link href="/" className="text-xl font-bold">
           {/* <Image src="/logo.png" alt="logo" width={144} height={30} /> */}
-          <h1 className="text-black">
-            <span className="text-pink-500">Deedee&apos;s</span> Blog
+          <h1 className="text-black uppercase">
+            <span className="text-primary">Deedee&apos;s</span> Blog
           </h1>
         </Link>
 
         <div className="flex items-center gap-5 text-black">
           {session && session.user ? (
             <>
-              <Button variant="outline">
+              <NbrButton variant="neutral" asChild>
                 <Link href="/startup/create">
                   <span className="max-sm:hidden">Créer un post</span>
                   <Plus className="size-7 sm:mt-1 sm:hidden" />
                 </Link>
-              </Button>
+              </NbrButton>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild className="cursor-pointer">
-                  <Avatar className="size-10">
+                  <Avatar className="size-10 outline outline-2 outline-black">
                     <AvatarImage
-                      src={session?.user?.image || ""}
+                      src={session ? session.user.image! : ""}
                       alt={session?.user?.name || "avatar"}
                     />
                     <AvatarFallback>
@@ -85,9 +85,9 @@ const Navbar = async () => {
                 await signIn("google");
               }}
             >
-              <Button variant="outline" type="submit">
+              <NbrButton variant="neutral" type="submit">
                 <span>Connexion</span>
-              </Button>
+              </NbrButton>
             </form>
           )}
         </div>

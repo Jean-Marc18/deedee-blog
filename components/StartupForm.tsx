@@ -5,13 +5,13 @@ import React, { useState, useActionState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
-import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { formSchema } from "@/lib/validation";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createPitch } from "@/lib/actions";
+import { NbrButton } from "./ui/nbrButton";
 
 const StartupForm = () => {
   const { toast } = useToast();
@@ -174,14 +174,14 @@ const StartupForm = () => {
         {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
       </div>
 
-      <Button
+      <NbrButton
         type="submit"
         className="startup-form_btn text-white"
         disabled={isPending}
       >
         {isPending ? "Soumission en cours..." : "Soumettre votre pitch"}
         <Send className="size-6 ml-2" />
-      </Button>
+      </NbrButton>
     </form>
   );
 };
