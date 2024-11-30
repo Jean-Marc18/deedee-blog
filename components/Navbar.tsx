@@ -85,9 +85,9 @@ const Navbar = async () => {
                 await signIn("google");
               }}
             >
-              <button type="submit">
+              <Button variant="outline" type="submit">
                 <span>Connexion</span>
-              </button>
+              </Button>
             </form>
           )}
         </div>
